@@ -1,5 +1,6 @@
 <template>
   <v-app id="app" class="toggle-main-bg">
+    dsdasdsa
     <router-view />
     <!-- <cursor-fx :config="config"  :hide-inside="true"> </cursor-fx> -->
   </v-app>
