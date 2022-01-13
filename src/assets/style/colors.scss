@@ -1,0 +1,28 @@
+@import "./_variables.scss";
+:root {
+  --light-text: white;
+  --light-main-bg: #1f1f1f;
+  --light-sub-bg: #2a2a2a;
+}
+.white-text {
+  color: white;
+}
+
+.toggle-text-color {
+  transition: 0.3s;
+  color: var(--light-text) !important;
+}
+
+.toggle-sub-bg {
+  transition: 0.3s;
+  background: var(--light-sub-bg) !important;
+}
+
+.toggle-main-bg {
+  transition: 0.6s;
+  background: var(--light-main-bg) !important;
+}
+
+.secondary-text {
+  color: $secondary;
+}
