@@ -1,5 +1,5 @@
 <template>
-  <div class="cards max-container">
+  <div class="cards max-container" id="cards">
     <v-row justify="center">
       <v-col
         class="cards__card "

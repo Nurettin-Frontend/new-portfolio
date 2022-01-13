@@ -13,7 +13,7 @@
     </div>
     <!-- right scroll -->
     <div class="header__scroll">
-      <span>{{ $t("scroll") }}</span>
+      <span @click="$vuetify.goTo('#cards')">{{ $t("scroll") }}</span>
       <div class="header__scroll__line"></div>
     </div>
 
