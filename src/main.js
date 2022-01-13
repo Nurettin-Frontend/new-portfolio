@@ -18,7 +18,7 @@ Vue.prototype.$vuescrollConfig = {
 };
 new Vue({
   store,
-  router: router,
+  router,
   vuetify,
   i18n,
   render: (h) => h(App),
