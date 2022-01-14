@@ -5,7 +5,7 @@
         <div class="works__tabs">
           <LeftTitle title="workLeftTitle" />
           <div>
-            <div class="works__tabs__title ">
+            <div class="works__tabs__title">
               <span class="toggle-text-color"
                 >{{ $t("workTitle1") }}<br />
                 {{ $t("workTitle2") }}</span
@@ -29,14 +29,24 @@
 
       <v-col md="4" cols="6" v-for="(project, i) in filteredProjects" :key="i">
         <transition name="list">
-          <div class="works__cover cursor-pointer" @click="goToPage(project)">
-            <div class="works__cover__layout"></div>
-            <img :src="project.img" alt="" />
-            <div class="works__cover__contain">
-              <div class="works__cover__contain__top">
-                <span>{{ project.title }}</span>
+          <div class="skeleton-card">
+            <VueSkeletonLoader
+              :height="300"
+              animation="fade"
+              v-if="!project.imageLoaded"
+            />
+              <div
+                class="works__cover cursor-pointer"
+                @click="goToPage(project)"
+              >
+                <div class="works__cover__layout"></div>
+                <img v-show="project.imageLoaded" :src="project.img" alt="" @load="project.imageLoaded = true" />
+                <div class="works__cover__contain">
+                  <div class="works__cover__contain__top">
+                    <span>{{ project.title }}</span>
+                  </div>
+                </div>
               </div>
-            </div>
           </div>
         </transition>
       </v-col>
@@ -46,9 +56,11 @@
 
 <script>
 import LeftTitle from "./LeftTitle";
+import VueSkeletonLoader from "skeleton-loader-vue";
 export default {
   components: {
     LeftTitle,
+    VueSkeletonLoader,
   },
   data: () => ({
     clientX: null,
@@ -65,6 +77,7 @@ export default {
         date: "Date 1",
         link: "https://disrupt-x.io/new-portfolio/#/",
         lang: "VUE",
+        imageLoaded: false
       },
       {
         title: "UNIFI SOLUTIONS",
@@ -73,6 +86,7 @@ export default {
         date: "Date 2",
         link: "https://unifi.solutions/",
         lang: "VUE",
+        imageLoaded: false
       },
       {
         title: "WRITABLES",
@@ -81,15 +95,16 @@ export default {
         date: "Date 3",
         link: "https://new.writables.ae/",
         lang: "VUE",
+        imageLoaded: false
       },
       {
         title: "MUSLIM",
         img: require("@/assets/images/projects/muslim.png"),
 
         date: "Date 4",
-        link:
-          "https://drive.google.com/file/d/1SnIrGXAEO-kR5ygm5Z9c3T89sW3FiAU-/view",
+        link: "https://drive.google.com/file/d/1SnIrGXAEO-kR5ygm5Z9c3T89sW3FiAU-/view",
         lang: "VUE",
+        imageLoaded: false
       },
     ],
     filter: "VUE",
@@ -274,5 +289,15 @@ export default {
 .list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */ {
   opacity: 0;
   transform: translateY(30px);
+}
+.skeleton-card{
+  position: relative
+}
+.shape--flat{
+  width: 100% !important;
+  position: absolute !important;
+  top: 0px !important;
+  left: 0px !important;
+  z-index: 99 !important
 }
 </style>

@@ -7515,6 +7515,11 @@
   dependencies:
     "is-arrayish" "^0.3.1"
 
+"skeleton-loader-vue@^1.0.10":
+  "integrity" "sha512-71WVaMrXxpzZp1NY1U+DEXi1EbMJ7PdUDW2aiCXKrP0a0IZBMfLX2Nxq9hQXK7M8YHweTMlCRTDYScH/B3/7nQ=="
+  "resolved" "https://registry.npmjs.org/skeleton-loader-vue/-/skeleton-loader-vue-1.0.10.tgz"
+  "version" "1.0.10"
+
 "slash@^1.0.0":
   "integrity" "sha1-xB8vbDn8FtHNF61LXYlhFK5HDVU="
   "resolved" "https://registry.nlark.com/slash/download/slash-1.0.0.tgz"

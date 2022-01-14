@@ -1,6 +1,11 @@
 <template>
   <div class="header" @mousemove="parallax" @mouseleave="reset" id="home">
     <!-- socials -->
+    <transition name="fade">
+      <div class="header__layout" v-if="!loaded">
+        <div class="loader">Loading...</div>
+      </div>
+    </transition>
     <div class="header__social">
       <div class="header__social__link" v-for="(social, i) in socials" :key="i">
         <a :href="social.link" target="_blank">
@@ -20,7 +25,7 @@
     <!-- center img -->
     <div class="header__center text-center">
       <div class="header__center__img bg"></div>
-      <span class="header__center__text toggle-text-color "
+      <span class="header__center__text toggle-text-color"
         >{{ $t("me1") }} <br />
         {{ $t("me2") }}</span
       >
@@ -31,6 +36,7 @@
 <script>
 export default {
   data: () => ({
+    loaded: false,
     socials: [
       {
         icon: "mdi-facebook",
@@ -54,13 +60,19 @@ export default {
       let bg = document.querySelector(".bg");
       const x = (window.innerWidth - e.pageX * 3) / 350;
       const y = (window.innerHeight - e.pageY * 3) / 350;
-      bg.style.transform = `translateX(${-50 + x}%) translateY(${-50 +
-        y}%) scale(1.04)`;
+      bg.style.transform = `translateX(${-50 + x}%) translateY(${
+        -50 + y
+      }%) scale(1.04)`;
     },
     reset() {
       let bg = document.querySelector(".bg");
       bg.style.transform = `translateX(-50%) translateY(-50%) scale(1)`;
     },
+  },
+  created() {
+    setTimeout(() => {
+      this.loaded = true;
+    }, 2500);
   },
 };
 </script>
@@ -174,5 +186,66 @@ export default {
 .v-application--is-rtl .header__social {
   right: 40px !important;
   left: unset;
+}
+.header__layout {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100vh;
+  background: #1f1f1f;
+  z-index: 99999999;
+  .loader {
+    z-index: 9999999999999999;
+    width: 250px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: helvetica, arial, sans-serif;
+    text-transform: uppercase;
+    font-weight: 900;
+    color: $secondary;
+    letter-spacing: 0.2em;
+
+    &::before,
+    &::after {
+      content: "";
+      display: block;
+      width: 15px;
+      height: 15px;
+      background: $secondary;
+      position: absolute;
+      animation: load 0.7s infinite alternate ease-in-out;
+    }
+
+    &::before {
+      top: 0;
+    }
+
+    &::after {
+      bottom: 0;
+    }
+  }
+
+  @keyframes load {
+    0% {
+      left: 0;
+      height: 30px;
+      width: 15px;
+    }
+    50% {
+      height: 8px;
+      width: 40px;
+    }
+    100% {
+      left: 235px;
+      height: 30px;
+      width: 15px;
+    }
+  }
 }
 </style>
